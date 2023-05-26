@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import {
   Row,
@@ -8,13 +10,26 @@ import {
   Button,
 } from 'react-bootstrap';
 import { Rating } from '../components';
-import products from '../products';
 import { FiShoppingCart } from '../utils/icons';
 
 const ProductScreen = () => {
+  const [product, setProduct] = useState({});
+
   const params = useParams();
   const { id } = params;
-  const product = products.find((p) => p._id === id);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/${id}`);
+        setProduct(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
 
   const {
     name,
@@ -42,7 +57,11 @@ const ProductScreen = () => {
               <h3>{name}</h3>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Rating value={rating} text={`${numReviews} reviews`} />
+              <Rating
+                value={rating}
+                color='text-warning'
+                text={`${numReviews} reviews`}
+              />
             </ListGroup.Item>
             <ListGroup.Item>Price: ${price}</ListGroup.Item>
             <ListGroup.Item>

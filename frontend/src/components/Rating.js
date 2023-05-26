@@ -1,8 +1,8 @@
 import { ImStarHalf, ImStarFull, ImStarEmpty } from '../utils/icons';
 
-const Rating = ({ value, color }) => {
+const Rating = ({ value, color, text }) => {
   return (
-    <div className='rating'>
+    <div className='rating d-flex gap-1 align-items-center'>
       <span>
         {value >= 1 ? (
           <ImStarFull className={color} size={15} />
@@ -48,6 +48,7 @@ const Rating = ({ value, color }) => {
           <ImStarEmpty className={color} size={15} />
         )}
       </span>
+      {<span>{text && text}</span>}
     </div>
   );
 };
