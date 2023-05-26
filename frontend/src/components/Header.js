@@ -15,12 +15,12 @@ const Header = () => {
             <Nav className='ms-auto'>
               <LinkContainer to='/cart'>
                 <Nav.Link className='d-flex align-items-center gap-1'>
-                  <FiShoppingCart /> Cart
+                  <FiShoppingCart size={20} /> Cart
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to='/login'>
                 <Nav.Link className='d-flex align-items-center gap-1'>
-                  <AiOutlineUser /> Sign In
+                  <AiOutlineUser size={20} /> Sign In
                 </Nav.Link>
               </LinkContainer>
             </Nav>
