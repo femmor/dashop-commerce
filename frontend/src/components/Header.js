@@ -1,26 +1,28 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { FiShoppingCart, AiOutlineUser } from '../utils/icons';
-import IconLink from './IconLink';
 
 const Header = () => {
   return (
     <header>
       <Navbar bg='dark' expand='lg' variant='dark' collapseOnSelect>
         <Container>
-          <Navbar.Brand href='/'>DaShop</Navbar.Brand>
+          <LinkContainer to='/'>
+            <Navbar.Brand>DaShop</Navbar.Brand>
+          </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
-              <IconLink
-                icon={<FiShoppingCart />}
-                text='Cart'
-                url='/cart'
-              />
-              <IconLink
-                icon={<AiOutlineUser />}
-                text='Sign In'
-                url='/login'
-              />
+              <LinkContainer to='/cart'>
+                <Nav.Link className='d-flex align-items-center gap-1'>
+                  <FiShoppingCart /> Cart
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to='/login'>
+                <Nav.Link className='d-flex align-items-center gap-1'>
+                  <AiOutlineUser /> Sign In
+                </Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>
