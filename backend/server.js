@@ -1,7 +1,9 @@
 import express from 'express';
+import dotenv from 'dotenv';
 import cors from 'cors';
 import products from './data/products.js';
 
+dotenv.config();
 const app = express();
 
 // Middleware
@@ -23,4 +25,8 @@ app.get('/api/products/:id', (req, res) => {
 
 const PORT = process.env.PORT || 5005;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT, () =>
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
+  )
+);
