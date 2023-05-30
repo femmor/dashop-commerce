@@ -38,10 +38,12 @@ const productSchema = Schema(
       type: String,
       required: true,
     },
-    reviews: {
-      type: Schema.Types.ObjectId,
+    reviews: [reviewSchema], // array of review object
+    rating: {
+      type: Number,
+      required: true,
+      default: 0, // default rating is 0
     },
-    rating: [reviewSchema],
     numReviews: {
       type: Number,
       required: true,
