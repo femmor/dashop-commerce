@@ -4,6 +4,10 @@ import cors from 'cors';
 import products from './data/products.js';
 import userRoutes from './routes/userRoutes.js';
 import productRoutes from './routes/productRoutes.js';
+import {
+  errorHandler,
+  notFound,
+} from './middleware/errorMiddleware.js';
 
 // DB CONNECTION
 import connectDB from './config/db.js';
@@ -18,6 +22,12 @@ app.use(cors());
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
+
+// 404 error middleware
+app.use(notFound);
+
+// Request error middleware
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5005;
 

@@ -17,7 +17,8 @@ const getProduct = asyncHandler(async (req, res) => {
   if (product) {
     res.status(200).json(product);
   } else {
-    res.status(404).json({ message: 'Product not found' });
+    res.status(404);
+    throw new Error('Product not found');
   }
 });
 
