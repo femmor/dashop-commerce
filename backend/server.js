@@ -2,6 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import products from './data/products.js';
+import userRoutes from './routes/userRoutes.js';
+import productRoutes from './routes/productRoutes.js';
 
 // DB CONNECTION
 import connectDB from './config/db.js';
@@ -13,18 +15,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('API is running...');
-});
-
-app.get('/api/products', (req, res) => {
-  res.json(products);
-});
-
-app.get('/api/products/:id', (req, res) => {
-  const product = products.find((p) => p._id === req.params.id);
-  res.json(product);
-});
+// Routes
+app.use('/api/users', userRoutes);
+app.use('/api/products', productRoutes);
 
 const PORT = process.env.PORT || 5005;
 
