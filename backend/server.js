@@ -3,6 +3,9 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import products from './data/products.js';
 
+// DB CONNECTION
+import connectDB from './config/db.js';
+
 dotenv.config();
 const app = express();
 
@@ -25,8 +28,16 @@ app.get('/api/products/:id', (req, res) => {
 
 const PORT = process.env.PORT || 5005;
 
-app.listen(PORT, () =>
-  console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
-  )
-);
+// Connect to MongoDB and start server
+const startServer = async () => {
+  try {
+    await connectDB();
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Error starting server!');
+  }
+};
+
+startServer();
