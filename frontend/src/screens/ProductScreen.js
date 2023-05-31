@@ -7,7 +7,7 @@ import {
   Card,
   Button,
 } from 'react-bootstrap';
-import { Rating } from '../components';
+import { Loader, Rating } from '../components';
 import { FiShoppingCart } from '../utils/icons';
 import { useGetProductDetailsQuery } from '../slices/productApiSlice';
 
@@ -28,9 +28,7 @@ const ProductScreen = () => {
       </Link>
 
       {isLoading ? (
-        <>
-          <h2>Loading...</h2>
-        </>
+        <Loader />
       ) : error ? (
         <div>{error?.data?.message || error?.message}</div>
       ) : (

@@ -22,3 +22,11 @@ main {
 .rating-container > * {
   margin-right: 0.5rem;
 }
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+}
