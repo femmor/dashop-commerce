@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 const Product = ({ product }) => {
   const { _id, name, image, price, rating, numReviews } = product;
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card>
       <Link to={`/product/${_id}`}>
-        <Card.Img variant='top' src={image || ''} />
+        <Card.Img src={image || ''} />
       </Link>
       <Card.Body>
         <Link to={`/product/${_id}`}>
-          <Card.Title as='div'>{name}</Card.Title>
+          <Card.Title>{name}</Card.Title>
         </Link>
         <div className='my-3 rating-container'>
           <Rating value={rating} color='text-warning' />
