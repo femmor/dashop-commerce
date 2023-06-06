@@ -7,7 +7,7 @@ import {
 
 import { Container } from 'react-bootstrap';
 import { Footer, Header } from './components';
-import { HomeScreen, ProductScreen } from './screens';
+import { HomeScreen, ProductScreen, CartScreen } from './screens';
 
 const App = () => {
   return (
@@ -18,6 +18,7 @@ const App = () => {
           <Routes>
             <Route path='/*' element={<HomeScreen />} />
             <Route path='/product/:id' element={<ProductScreen />} />
+            <Route path='/cart' element={<CartScreen />} />
           </Routes>
         </main>
       </Container>
