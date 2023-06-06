@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node ./backend/server.js",
     "stop": "killall node",
-    "backend": "nodemon ./backend/server.js",
+    "backend": "node --watch ./backend/server.js",
     "frontend": "npm start --prefix ./frontend",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
     "data:import": "node ./backend/seeder.js",
@@ -26,7 +26,6 @@
     "react-loading": "^2.0.3"
   },
   "devDependencies": {
-    "concurrently": "^8.0.1",
-    "nodemon": "^2.0.22"
+    "concurrently": "^8.0.1"
   }
 }

@@ -15,6 +15,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    // Add to cart action
     addToCart: (state, action) => {
       const item = action.payload;
       const existItem = state.cartItems.find(
@@ -53,10 +54,7 @@ const cartSlice = createSlice({
       ).toFixed(2);
 
       // Save cart items to local storage so that when user refreshes the page, the cart items will still be there
-      localStorage.setItem(
-        'cartItems',
-        JSON.stringify(state.cartItems)
-      );
+      localStorage.setItem('cart', JSON.stringify(state));
     },
   },
 });

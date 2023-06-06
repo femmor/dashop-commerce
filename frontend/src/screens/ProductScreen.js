@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
   Row,
@@ -6,20 +7,35 @@ import {
   ListGroup,
   Card,
   Button,
+  Form,
 } from 'react-bootstrap';
 import { Loader, Message, Rating } from '../components';
 import { FiShoppingCart } from '../utils/icons';
 import { useGetProductDetailsQuery } from '../slices/productApiSlice';
+import { addToCart } from '../slices/cartSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const ProductScreen = () => {
+  const [qty, setQty] = useState(1);
+
   const params = useParams();
   const { id } = params;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     data: product,
     isLoading,
     error,
   } = useGetProductDetailsQuery(id);
+
+  // Add to cart handler - add product to cart
+  const addToCartHandler = () => {
+    dispatch(addToCart({ ...product, qty }));
+    navigate('/cart');
+  };
 
   return (
     <>
@@ -86,11 +102,38 @@ const ProductScreen = () => {
                       </Col>
                     </Row>
                   </ListGroup.Item>
+
+                  {product?.countInStock > 0 && (
+                    <ListGroup.Item>
+                      <Row>
+                        <Col>Qty</Col>
+                        <Col>
+                          <Form.Control
+                            as='select'
+                            className='form-select'
+                            value={qty}
+                            onChange={(e) =>
+                              setQty(Number(e.target.value))
+                            }
+                          >
+                            {[
+                              ...Array(product?.countInStock).keys(),
+                            ].map((x) => (
+                              <option key={x + 1} value={x + 1}>
+                                {x + 1}
+                              </option>
+                            ))}
+                          </Form.Control>
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  )}
                   <ListGroup.Item>
                     <Button
                       className='btn w-100 d-flex align-items-center justify-content-center gap-1'
                       type='button'
                       disabled={product?.countInStock === 0}
+                      onClick={addToCartHandler}
                     >
                       <FiShoppingCart className='me-1' size={20} />
                       Add To Cart
